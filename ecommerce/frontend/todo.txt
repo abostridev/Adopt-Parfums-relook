@@ -1,0 +1,30 @@
+montrer order model a chat et demander a faire les transfere depuis uploads vers mongoDB
+
+
+🎨 Nouvelle palette (propre & pro)
+
+On va limiter à 5 couleurs max.
+
+• couleur principale (brand)
+→ rose/beige doux
+ex : #F3D6C6
+
+• couleur secondaire
+→ vert naturel
+ex : #5F8F7E
+
+• background global
+→ crème très clair
+ex : #FAF7F5
+
+• texte principal
+→ presque noir
+ex : #1F1F1F
+
+• gris utilitaire
+→ bordures, texte secondaire
+ex : #8A8A8A
+
+
+
+les link homme femme enfant on a pas encore fait leur page nn? et les chose de conseils et astuce sa page et les chose qui doivent etre dans la page de productDetail et meme l'iconne de de recherche et tout
