@@ -20,7 +20,6 @@ app.use("/api", apiLimiter);
 app.use(
   cors({
     origin: [
-      "http://localhost:5173",
       "https://adopt-parfums-relook.vercel.app"
     ],
     credentials: true,
