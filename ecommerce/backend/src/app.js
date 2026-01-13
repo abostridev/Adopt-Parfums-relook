@@ -21,7 +21,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://ton-frontend.vercel.app"
+      "https://adopt-parfums-relook.vercel.app"
     ],
     credentials: true,
   })
