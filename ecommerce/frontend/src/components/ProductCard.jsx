@@ -46,18 +46,18 @@ const ProductCard = ({ product }) => {
           </h3>
 
           {/* DESCRIPTION */}
-          <p className="text-sm text-[#8A8A8A] line-clamp-2">
+          <p className="text-sm text-muted line-clamp-2">
             {product.description}
           </p>
 
           {/* PRIX */}
           <div className="flex items-center gap-3">
-            <span className="text-2xl font-semibold text-[#1F1F1F]">
+            <span className="text-2xl font-semibold text-text">
               {product.price} €
             </span>
 
             {product.oldPrice && (
-              <span className="text-sm text-[#8A8A8A] line-through">
+              <span className="text-sm text-muted line-through">
                 {product.oldPrice} €
               </span>
             )}
@@ -65,7 +65,7 @@ const ProductCard = ({ product }) => {
 
           {/* CTA */}
           <div className="pt-2">
-            <span className="inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-[#1F1F1F] border-b border-[#1F1F1F] group-hover:text-[#5F8F7E] group-hover:border-[#5F8F7E] transition">
+            <span className="inline-flex items-center gap-2 text-sm font-semibold tracking-wide lg:text-text border-b border-text text-secondary  group-hover:text-secondary group-hover:border-secondary transition">
               Découvrir le parfum
               <span className="transition group-hover:translate-x-1">→</span>
             </span>

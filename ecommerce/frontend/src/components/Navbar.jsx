@@ -85,11 +85,11 @@ const Navbar = () => {
         </Link>
 
         {/* MENU DESKTOP */}
-        <nav className="hidden md:flex items-center gap-8 text-sm">
+        <nav className="hidden lg:flex items-center gap-8 text-sm">
           <Link to="/category/femme" className="hover:text-secondary" onClick={window.scrollTo(0, 0)}>Femme</Link>
           <Link to="/category/homme" className="hover:text-secondary" onClick={window.scrollTo(0, 0)}>Homme</Link>
           <Link to="/category/enfant" className="hover:text-secondary" onClick={window.scrollTo(0, 0)}>Enfant</Link>
-          <Link to="/orders" className="relative font-title block border-b border-t border-secondary bg-amber-50 py-1 px-2 font-semibold hover:text-secondary" onClick={window.scrollTo(0, 0)}> Mes commandes
+          <Link to="/orders" className=" relative font-title block border-b border-t border-secondary bg-amber-50 py-1 px-2 font-semibold hover:text-secondary" onClick={window.scrollTo(0, 0)}> Mes commandes
             {user && orderCount > 0 && (
               <span className="absolute -top-2 -right-2 bg-secondary text-white text-sm font-title w-5 h-5 rounded-full flex items-center justify-center">
                 {orderCount}
@@ -170,7 +170,7 @@ const Navbar = () => {
             )}
           </div>
 
-          <button className="md:hidden" onClick={() => setOpen(!open)}>
+          <button className="lg:hidden" onClick={() => setOpen(!open)}>
             {open ? <X /> : <Menu />}
             {user && orderCount > 0 && !open && (
               <span className=" md:hidden absolute -top-2 -right-2 bg-secondary text-white text-sm font-title w-5 h-5 rounded-full flex items-center justify-center">
@@ -184,7 +184,7 @@ const Navbar = () => {
       </div>
       {/* MENU MOBILE */}
       {open && (
-        <nav className="md:hidden bg-[background] border-t px-6 py-4 space-y-4">
+        <nav className="lg:hidden bg-[background] border-t px-6 py-4 space-y-4">
           <Link to="/category/femme" className="block" onClick={() => closeMenu()}>Femme</Link>
           <Link to="/category/homme" className="block" onClick={() => closeMenu()}>Homme</Link>
           <Link to="/category/enfant" className="block" onClick={() => closeMenu()}>Enfant</Link>
