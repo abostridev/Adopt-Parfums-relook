@@ -94,7 +94,7 @@ const ProductDetail = () => {
 
         <div className="relative rounded-3xl overflow-hidden shadow-xl">
           <img
-            src={product.images?.[0]}
+            src={`${import.meta.env.VITE_API_URL}${product.images[0]}`}
             alt={product.name}
             className="w-full h-[460px] md:h-[560px] object-cover"
           />
