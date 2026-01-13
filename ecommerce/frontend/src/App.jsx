@@ -25,7 +25,7 @@ import Search from "./pages/Search";
 import Dashboard from "./pages/admin/Dashboard";
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminProducts from "./pages/admin/AdminProducts";
-import AdminOrders from "./pages/admin/ordersAdmin";
+import AdminOrders from "./pages/admin/OrdersAdmin";
 import AdminConseils from "./pages/admin/Conseils";
 import AdminOrderDetail from "./pages/admin/AdminOrderDetail";
 import EditAdvice from "./pages/admin/EditAdvice";
