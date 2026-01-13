@@ -17,7 +17,7 @@ import Checkout from "./pages/Checkout";
 import Orders from "./pages/Orders";
 import CategoryProducts from "./pages/CategoryProducts";
 import ProductDetail from "./pages/ProductDetail";
-import Conseils from "./pages/Conseils";
+import Conseils from "./pages/conseils";
 import OAuthSuccess from "./pages/oauth-success";
 import Search from "./pages/Search";
 
