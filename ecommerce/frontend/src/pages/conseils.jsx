@@ -3,6 +3,7 @@ import api from "../api/axios";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import AdviceVideo from "../components/AdviceVideo";
+import { getMediaUrl } from "../utils/media";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -27,7 +28,6 @@ const Conseils = () => {
 
     fetchAdvices();
   }, []);
-const API_URL = import.meta.env.VITE_API_URL.replace("/api", "");
 
   return (
     <section className="bg-[#FAF7F5] min-h-screen">
@@ -126,7 +126,7 @@ const API_URL = import.meta.env.VITE_API_URL.replace("/api", "");
                 <div className="md:w-1/2 w-full md:py-5 py-3 px-3 md:px-0 border border-gray-500 md:rounded-r-2xl md:border-l-0  rounded-b-2xl md:rounded-bl-none border-t-0 md:border-t-1  ">
                   {advice.video && (
                     <AdviceVideo
-                      src={`${API_URL}${advice.video}`}
+                      src={getMediaUrl(advice.video)}
                     />
                   )}
                 </div>
