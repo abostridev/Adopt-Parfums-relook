@@ -218,12 +218,12 @@ const AdminProducts = () => {
       {/* MODAL */}
       {showForm && (
         <div
-          className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50"
+          className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4"
           onClick={() => setShowForm(false)}
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="bg-white rounded-3xl p-8 w-full max-w-2xl relative"
+            className="bg-white rounded-3xl p-6 sm:p-8 w-full max-w-2xl max-h-[90vh] overflow-y-auto relative"
           >
             <button
               onClick={() => setShowForm(false)}

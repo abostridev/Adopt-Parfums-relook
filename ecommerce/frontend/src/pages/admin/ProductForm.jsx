@@ -53,7 +53,7 @@ const ProductForm = ({ product, onSaved, onClose }) => {
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto px-4 py-8">
+    <div className="space-y-6 py-6">
     <form onSubmit={handleSubmit} className="space-y-6">
 
       {/* NOM */}
