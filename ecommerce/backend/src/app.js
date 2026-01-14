@@ -11,10 +11,9 @@ app.set("trust proxy", 1);
 
 
 
-const { apiLimiter, loginLimiter } = require("./middlewares/rateLimiters");
+const { apiLimiter } = require("./middlewares/rateLimiters");
 
 app.use("/api", apiLimiter);
-app.use("/api/auth/login", loginLimiter);
 app.use(
   cors({
     origin: [
