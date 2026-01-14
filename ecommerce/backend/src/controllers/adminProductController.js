@@ -35,9 +35,27 @@ exports.getProducts = async (req, res) => {
 
 
 exports.createProduct = async (req, res) => {
-  const product = await Product.create(req.body);
-  res.status(201).json(product);
+  try {
+    const data = { ...req.body };
+
+    // Sécurisation images (force chemin relatif)
+    if (Array.isArray(data.images)) {
+      data.images = data.images.map((img) => {
+        if (!img) return img;
+        return img.replace(/^https?:\/\/[^/]+/, "");
+      });
+    }
+
+    const product = await Product.create(data);
+    res.status(201).json(product);
+  } catch (error) {
+    res.status(400).json({
+      message: "Erreur création produit",
+      error: error.message,
+    });
+  }
 };
+
 
 exports.updateProduct = async (req, res) => {
   try {
@@ -54,7 +72,11 @@ exports.updateProduct = async (req, res) => {
     product.category = req.body.category ?? product.category;
     product.isActive = req.body.isActive ?? product.isActive;
     product.isFeatured = req.body.isFeatured ?? product.isFeatured;
-    product.images = req.body.images ?? product.images;
+    if (req.body.images) {
+      product.images = req.body.images.map((img) =>
+        img.replace(/^https?:\/\/[^/]+/, "")
+      );
+    }
 
     const updated = await product.save();
     res.json(updated);
