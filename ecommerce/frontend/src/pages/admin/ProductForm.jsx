@@ -53,8 +53,8 @@ const ProductForm = ({ product, onSaved, onClose }) => {
   };
 
   return (
-    <div className="py-8">
-    <form onSubmit={handleSubmit} className="sm:space-y-6 space-x-4 ">
+    <div className="w-full max-w-2xl mx-auto px-4 py-8">
+    <form onSubmit={handleSubmit} className="space-y-6">
 
       {/* NOM */}
       <div>
@@ -67,7 +67,7 @@ const ProductForm = ({ product, onSaved, onClose }) => {
       </div>
 
       {/* PRIX */}
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="text-sm font-medium">Prix</label>
           <input
@@ -154,10 +154,10 @@ const ProductForm = ({ product, onSaved, onClose }) => {
       </div>
 
       {/* OPTIONS */}
-      <div className="flex items-center gap-3">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 border-t pt-4">
         <input
           type="checkbox"
-          checked={form.featured}
+          checked={form.isFeatured}
           onChange={(e) =>
             setForm({ ...form, isFeatured: e.target.checked })
           }
@@ -169,7 +169,7 @@ const ProductForm = ({ product, onSaved, onClose }) => {
 
 
       {/* ACTIONS */}
-      <div className="flex justify-end gap-4 pt-6">
+      <div className="flex flex-col sm:flex-row justify-end gap-4 pt-6 border-t">
         <button
           type="button"
           onClick={() => onClose()}
