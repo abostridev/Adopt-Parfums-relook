@@ -146,7 +146,7 @@ const ProductForm = ({ product, onSaved, onClose }) => {
       <div className="flex justify-end gap-4 pt-6">
         <button
           type="button"
-          onClick={() => onClose}
+          onClick={() => onClose()}
           className="px-6 py-3 rounded-full border"
         >
           Annuler

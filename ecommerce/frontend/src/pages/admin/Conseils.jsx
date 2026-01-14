@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../../api/axios";
 import { Upload, Video } from "lucide-react";
 import { Link } from "react-router-dom";
+import { getMediaUrl } from "../../utils/media";
 
 const AdminConseils = () => {
   const [title, setTitle] = useState("");
@@ -146,7 +147,7 @@ const AdminConseils = () => {
           >
             {/* MINIATURE */}
             <video
-              src={`${import.meta.env.VITE_API_URL}${c.video}`}
+              src={getMediaUrl(c.video)}
               className="w-32 h-20 rounded-xl object-cover"
               muted
             />

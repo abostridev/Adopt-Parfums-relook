@@ -89,10 +89,20 @@ const AdminOrderDetail = () => {
       <div className="bg-white p-6 rounded-2xl space-y-4 border border-secondary/80">
         {order.items.map((item, i) => (
           <div key={i} className="flex items-center gap-4 border-b pb-4">
-            <img
-              src={getMediaUrl(item.image)}
-              className="w-16 h-16 rounded object-cover"
-            />
+            {item.image ? (
+              <img
+                src={getMediaUrl(item.image)}
+                alt={item.name}
+                className="w-16 h-16 rounded object-cover bg-gray-200"
+                onError={(e) => {
+                  e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="64" height="64"%3E%3Crect fill="%23f3f4f6" width="64" height="64"/%3E%3C/svg%3E';
+                }}
+              />
+            ) : (
+              <div className="w-16 h-16 rounded bg-gray-200 flex items-center justify-center">
+                <span className="text-xs text-gray-400">No image</span>
+              </div>
+            )}
             <div className="flex-1">
               <p className="font-medium">{item.name}</p>
               <p className="text-sm text-gray-500">
