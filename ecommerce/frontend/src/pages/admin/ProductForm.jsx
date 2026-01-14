@@ -46,7 +46,8 @@ const ProductForm = ({ product, onSaved, onClose }) => {
       onSaved();
     } catch (error) {
       console.error("Erreur upload:", error);
-      alert("Erreur: " + error.response?.data?.message || error.message);
+      const message = error.response?.data?.message || \"Impossible de créer le produit. Veuillez réessayer.\";
+      alert(\"Erreur: \" + message);
     }
   };
 

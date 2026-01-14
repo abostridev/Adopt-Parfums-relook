@@ -46,9 +46,10 @@ exports.createProduct = async (req, res) => {
     const product = await Product.create(data);
     res.status(201).json(product);
   } catch (error) {
+    console.error(\"[Product Creation Error]\", error);
     res.status(400).json({
-      message: "Erreur création produit",
-      error: error.message,
+      message: \"Erreur création produit\",
+      ...(process.env.NODE_ENV === \"development\" && { error: error.message }),
     });
   }
 };
@@ -82,9 +83,10 @@ exports.updateProduct = async (req, res) => {
     const updated = await product.save();
     res.json(updated);
   } catch (error) {
+    console.error(\"[Product Update Error]\", error);
     res.status(500).json({
-      message: "Erreur mise à jour produit",
-      error: error.message,
+      message: \"Erreur mise à jour produit\",
+      ...(process.env.NODE_ENV === \"development\" && { error: error.message }),
     });
   }
 };
