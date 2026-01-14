@@ -57,7 +57,7 @@ exports.login = async (req, res) => {
   res.cookie("csrfToken", crypto.randomUUID(), {
   httpOnly: false,
   secure: process.env.NODE_ENV === "production",
-  sameSite: "strict",
+  sameSite: "none",
 });
 
   res.json({
@@ -111,7 +111,11 @@ exports.refreshToken = async (req, res) => {
    LOGOUT
 ====================== */
 exports.logout = (req, res) => {
-  res.clearCookie("refreshToken");
+res.clearCookie("refreshToken", {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: "none",
+});
   res.sendStatus(204);
 };
 
