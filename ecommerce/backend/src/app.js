@@ -11,16 +11,16 @@ app.set("trust proxy", 1);
 
 
 
-const { apiLimiter } = require("./middlewares/rateLimiters");
+const { apiLimiter, loginLimiter } = require("./middlewares/rateLimiters");
 
 app.use("/api", apiLimiter);
-
-
-
+app.use("/api/auth/login", loginLimiter);
 app.use(
   cors({
     origin: [
-      "https://relook-parfums-relook.vercel.app" || "http://localhost:3000",
+      "https://relook-parfums-relook.vercel.app",
+      "http://localhost:3000",
+      "http://localhost:5173",
     ],
     credentials: true,
   })
@@ -40,7 +40,10 @@ app.use(passport.initialize());
 
 // Servir les images depuis le dossier "uploads"
 // Static uploads
-app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
+app.use(
+  "/uploads",
+  express.static(path.resolve(__dirname, "../uploads"))
+);
 
 
 

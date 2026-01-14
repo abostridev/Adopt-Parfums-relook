@@ -76,24 +76,34 @@ exports.login = async (req, res) => {
 exports.refreshToken = async (req, res) => {
   try {
     const token = req.cookies.refreshToken;
-    if (!token) return res.sendStatus(401);
+    if (!token) {
+      return res.sendStatus(401);
+    }
 
-    const decoded = jwt.verify(token, process.env.JWT_REFRESH_SECRET);
-    const user = await User.findById(decoded.id);
-    if (!user) return res.sendStatus(404);
+    jwt.verify(
+      token,
+      process.env.JWT_REFRESH_SECRET,
+      async (err, decoded) => {
+        if (err) {
+          return res.sendStatus(403);
+        }
 
-    const accessToken = generateAccessToken(user);
-    res.json({ accessToken });
-  } catch {
-    res.sendStatus(403);
+        const user = await User.findById(decoded.id);
+        if (!user) {
+          return res.sendStatus(404);
+        }
+
+        const accessToken = generateAccessToken(user);
+
+        return res.json({ accessToken });
+      }
+    );
+  } catch (err) {
+    console.error("Refresh error:", err);
+    return res.sendStatus(500);
   }
-  res.cookie("csrfToken", crypto.randomUUID(), {
-  httpOnly: false,
-  secure: process.env.NODE_ENV === "production",
-  sameSite: "strict",
-});
-
 };
+
 
 
 
