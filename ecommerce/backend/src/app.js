@@ -16,11 +16,12 @@ const { apiLimiter } = require("./middlewares/rateLimiters");
 app.use("/api", apiLimiter);
 app.use(
   cors({
-    origin: [
-      "https://relook-parfums-relook.vercel.app",
-      "http://localhost:3000",
-      "http://localhost:5173",
-    ],
+    origin: process.env.NODE_ENV === "production" 
+      ? [process.env.FRONT_URL]
+      : [
+          "http://localhost:3000",
+          "http://localhost:5173",
+        ],
     credentials: true,
   })
 );
