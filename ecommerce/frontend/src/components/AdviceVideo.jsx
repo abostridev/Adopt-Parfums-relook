@@ -53,7 +53,6 @@ const AdviceVideo = ({ src }) => {
           ref={videoRef}
           src={src}
           controls
-          muted
           playsInline
           preload="metadata"
           crossOrigin="anonymous"
