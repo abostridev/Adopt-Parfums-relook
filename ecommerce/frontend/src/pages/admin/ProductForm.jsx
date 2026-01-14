@@ -9,6 +9,7 @@ const ProductForm = ({ product, onSaved, onClose }) => {
     oldPrice: "",
     stock: "",
     category: "",
+    description: "",
     isFeatured: false,
   });
 
@@ -46,8 +47,8 @@ const ProductForm = ({ product, onSaved, onClose }) => {
       onSaved();
     } catch (error) {
       console.error("Erreur upload:", error);
-      const message = error.response?.data?.message || \"Impossible de créer le produit. Veuillez réessayer.\";
-      alert(\"Erreur: \" + message);
+      const message = error.response?.data?.message || "Impossible de créer le produit. Veuillez réessayer.";
+      alert("Erreur: " + message);
     }
   };
 
@@ -98,6 +99,30 @@ const ProductForm = ({ product, onSaved, onClose }) => {
           className="w-full mt-1 px-4 py-3 border rounded-xl"
           value={form.stock}
           onChange={(e) => setForm({ ...form, stock: e.target.value })}
+        />
+      </div>
+
+      {/* CATEGORY */}
+      <div>
+        <label className="text-sm font-medium">Catégorie</label>
+        <input
+          type="text"
+          className="w-full mt-1 px-4 py-3 border rounded-xl"
+          placeholder="ex: Parfum, Éau de toilette..."
+          value={form.category}
+          onChange={(e) => setForm({ ...form, category: e.target.value })}
+        />
+      </div>
+
+      {/* DESCRIPTION */}
+      <div>
+        <label className="text-sm font-medium">Description</label>
+        <textarea
+          className="w-full mt-1 px-4 py-3 border rounded-xl"
+          rows="4"
+          placeholder="Décrivez le produit..."
+          value={form.description || ""}
+          onChange={(e) => setForm({ ...form, description: e.target.value })}
         />
       </div>
 
