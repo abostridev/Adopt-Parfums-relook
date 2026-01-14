@@ -32,13 +32,21 @@ const ProductForm = ({ product, onSaved, onClose }) => {
     Object.keys(form).forEach((key) => data.append(key, form[key]));
     if (image) data.append("image", image);
 
-    if (product) {
-      await api.put(`/admin/products/${product._id}`, data);
-    } else {
-      await api.post("/admin/products", data);
+    try {
+      if (product) {
+        await api.put(`/admin/products/${product._id}`, data, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+      } else {
+        await api.post("/admin/products", data, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+      }
+      onSaved();
+    } catch (error) {
+      console.error("Erreur upload:", error);
+      alert("Erreur: " + error.response?.data?.message || error.message);
     }
-
-    onSaved();
   };
 
   return (

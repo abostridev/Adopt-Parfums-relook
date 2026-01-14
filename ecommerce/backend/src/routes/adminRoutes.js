@@ -3,6 +3,7 @@ const router = express.Router();
 const { protect } = require("../middlewares/authMiddleware");
 const admin = require("../middlewares/adminMiddleware");
 const uploadAdviceVideo = require("../middlewares/uploadAdviceVideo");
+const uploadProductImage = require("../middlewares/uploadProductImage");
 const { adminLimiter } = require("../middlewares/rateLimiters");
 
 router.use(adminLimiter);
@@ -34,8 +35,8 @@ const {
 } = require("../controllers/adminProductController");
 
 router.get("/products", protect, admin, getProducts);
-router.post("/products", protect, admin, createProduct);
-router.put("/products/:id", protect, admin, updateProduct);
+router.post("/products", protect, admin, uploadProductImage.single("image"), createProduct);
+router.put("/products/:id", protect, admin, uploadProductImage.single("image"), updateProduct);
 
 
 

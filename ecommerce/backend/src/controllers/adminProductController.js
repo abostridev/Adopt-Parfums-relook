@@ -38,12 +38,9 @@ exports.createProduct = async (req, res) => {
   try {
     const data = { ...req.body };
 
-    // Sécurisation images (force chemin relatif)
-    if (Array.isArray(data.images)) {
-      data.images = data.images.map((img) => {
-        if (!img) return img;
-        return img.replace(/^https?:\/\/[^/]+/, "");
-      });
+    // Si image uploadée via Cloudinary
+    if (req.file) {
+      data.images = [req.file.path]; // URL complète de Cloudinary
     }
 
     const product = await Product.create(data);
@@ -72,10 +69,14 @@ exports.updateProduct = async (req, res) => {
     product.category = req.body.category ?? product.category;
     product.isActive = req.body.isActive ?? product.isActive;
     product.isFeatured = req.body.isFeatured ?? product.isFeatured;
-    if (req.body.images) {
-      product.images = req.body.images.map((img) =>
-        img.replace(/^https?:\/\/[^/]+/, "")
-      );
+    
+    // Si nouvelle image uploadée
+    if (req.file) {
+      product.images = [req.file.path];
+    } else if (req.body.images) {
+      product.images = Array.isArray(req.body.images) 
+        ? req.body.images 
+        : [req.body.images];
     }
 
     const updated = await product.save();
