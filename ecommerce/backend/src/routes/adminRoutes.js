@@ -32,11 +32,13 @@ const {
   getProducts,
   createProduct,
   updateProduct,
+  deleteProduct
 } = require("../controllers/adminProductController");
 
 router.get("/products", protect, admin, getProducts);
 router.post("/products", protect, admin, uploadProductImage.single("image"), createProduct);
 router.put("/products/:id", protect, admin, uploadProductImage.single("image"), updateProduct);
+router.delete("/products/:id", protect, admin, deleteProduct);
 
 
 

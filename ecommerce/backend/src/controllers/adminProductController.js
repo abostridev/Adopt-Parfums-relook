@@ -91,3 +91,17 @@ exports.updateProduct = async (req, res) => {
   }
 };
 
+exports.deleteProduct = async (req, res) => {
+  try {
+    const product = await Product.findByIdAndDelete(req.params.id);
+    if (!product) {
+      return res.status(404).json({ message: "Produit introuvable" });
+    }
+    res.json({ message: "Produit supprimé" });
+  } catch (error) {
+    res.status(500).json({
+      message: "Erreur suppression produit",
+      ...(process.env.NODE_ENV === "development" && { error: error.message }),
+    });
+  }
+};
