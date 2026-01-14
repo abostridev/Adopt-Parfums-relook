@@ -44,7 +44,7 @@ export const getAccessToken = () => accessToken;
 api.interceptors.request.use(
   (config) => {
     if (accessToken) {
-      return config.headers.Authorization = `Bearer ${accessToken}`;
+      config.headers.Authorization = `Bearer ${accessToken}`;
     }
     return config;
   },
