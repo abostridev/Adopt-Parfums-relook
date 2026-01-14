@@ -13,7 +13,7 @@ const slides = [
     cta: 'Découvrir Femme',
     link: '/category/femme',
     image:
-      'http://localhost:5000/uploads/products/product4-F.jpg',
+      `${import.meta.env.VITE_API_URL}/uploads/products/product4-F.jpg`,
   },
   {
     title: 'Des notes intenses et affirmées',
@@ -23,7 +23,7 @@ const slides = [
     cta: 'Découvrir Homme',
     link: '/category/homme',
     image:
-      'http://localhost:5000/uploads/products/product9-H.jpg',
+      `${import.meta.env.VITE_API_URL}/uploads/products/product9-H.jpg`,
   },
   {
     title: 'La douceur en toute légèreté',
@@ -33,7 +33,7 @@ const slides = [
     cta: 'Découvrir Enfant',
     link: '/category/enfant',
     image:
-      'http://localhost:5000/uploads/products/product15-E.jpg',
+      `${import.meta.env.VITE_API_URL}/uploads/products/product15-E.jpg`,
   },
 ];
 
