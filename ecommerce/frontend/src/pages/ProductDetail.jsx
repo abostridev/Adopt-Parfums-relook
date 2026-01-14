@@ -79,8 +79,7 @@ const ProductDetail = () => {
       if (err.response?.status === 401) {
         navigate("/login", { state: { from: `/product/${id}` } });
       } else {
-        alert("Erreur lors de l'ajout au panier.");
-      }
+        console.error("Erreur ajout au panier", err);}
     }
   };
 
@@ -118,7 +117,6 @@ const ProductDetail = () => {
           </p>
 
           <div className="flex items-center gap-4 mb-8">
-            <span className="text-3xl font-semibold">{product.price} €</span>
             {product.price && product.oldPrice && (<>
               <span className="text-3xl font-semibold">{product.price} €</span>
               <span className="line-through text-[#8A8A8A]">
