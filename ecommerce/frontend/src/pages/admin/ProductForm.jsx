@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../../api/axios";
+import { getMediaUrl } from "../../utils/media";
 
 const ProductForm = ({ product, onSaved, onClose }) => {
   const [form, setForm] = useState({
@@ -106,7 +107,7 @@ const ProductForm = ({ product, onSaved, onClose }) => {
         <div className="flex gap-4 mt-2">
           {preview && (
             <img
-              src={preview}
+              src={getMediaUrl(preview)}
               className="w-24 h-24 rounded-xl object-cover"
             />
           )}

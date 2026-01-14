@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../../api/axios";
+import { getMediaUrl } from "../../utils/media";
 
 const STATUS = [
   { value: "pending", label: "En attente" },
@@ -89,7 +90,7 @@ const AdminOrderDetail = () => {
         {order.items.map((item, i) => (
           <div key={i} className="flex items-center gap-4 border-b pb-4">
             <img
-              src={item.image}
+              src={getMediaUrl(item.image)}
               className="w-16 h-16 rounded object-cover"
             />
             <div className="flex-1">

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../../api/axios";
+import { getMediaUrl } from "../../utils/media";
 
 const EditAdvice = () => {
   const { id } = useParams();
@@ -21,9 +22,7 @@ const EditAdvice = () => {
         title: advice.title,
         description: advice.description,
       });
-      setPreview(
-        `${import.meta.env.VITE_API_URL}${advice.video}`
-      );
+      setPreview(advice.video);
     });
   }, [id]);
 
@@ -61,7 +60,7 @@ const EditAdvice = () => {
 
       {preview && (
         <video
-          src={preview}
+          src={getMediaUrl(preview)}
           controls
           className="w-full h-64 rounded-xl object-cover mb-6"
         />
