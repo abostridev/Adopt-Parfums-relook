@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { getMediaUrl } from "../utils/media";
 
 
 const ProductCard = ({ product }) => {
@@ -14,9 +15,9 @@ const ProductCard = ({ product }) => {
         {/* IMAGE */}
         <div className="relative h-[320px]  flex items-center justify-center">
           <img
-            src={`${API_URL}${product.images[0]}`}
+            src={getMediaUrl(product.images?.[0])}
             alt={product.name}
-          className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+            className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
           />
 
           {/* BADGE PROMO */}

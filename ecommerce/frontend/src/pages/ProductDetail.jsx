@@ -1,6 +1,7 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../api/axios";
+import { getMediaUrl } from "../utils/media";
 import ProductCard from "../components/ProductCard";
 
 const ProductDetail = () => {
@@ -94,7 +95,7 @@ const ProductDetail = () => {
 
         <div className="relative rounded-3xl overflow-hidden shadow-xl">
           <img
-            src={`${import.meta.env.VITE_API_URL}${product.images[0]}`}
+            src={getMediaUrl(product.images?.[0])}
             alt={product.name}
             className="w-full h-[460px] md:h-[560px] object-cover"
           />

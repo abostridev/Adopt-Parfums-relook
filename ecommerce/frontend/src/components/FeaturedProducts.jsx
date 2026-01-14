@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../api/axios";
+import { getMediaUrl } from "../utils/media";
 import { Link } from "react-router-dom";
 
 const FeaturedProducts = () => {
@@ -38,7 +39,7 @@ const FeaturedProducts = () => {
             >
               {/* Image */}
               <img
-                src={`${import.meta.env.VITE_API_URL}${product.images[0]}`}
+                src={getMediaUrl(product.images?.[0])}
                 alt={product.name}
                 className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
               />

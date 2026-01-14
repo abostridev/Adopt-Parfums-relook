@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import api from "../../api/axios";
+import { getMediaUrl } from "../../utils/media";
 import ProductForm from "./ProductForm";
 import { Pencil, Trash2, Star } from "lucide-react";
 import AdminProductsSkeleton from "../../components/admin/AdminProductsSkeleton";
@@ -94,7 +95,7 @@ const AdminProducts = () => {
                 {/* PRODUIT */}
                 <td className="p-4 flex items-center gap-3">
                   <img
-                    src={p.images?.[0]}
+                    src={getMediaUrl(p.images?.[0])}
                     alt={p.name}
                     className="w-12 h-12 rounded-lg object-cover"
                   />

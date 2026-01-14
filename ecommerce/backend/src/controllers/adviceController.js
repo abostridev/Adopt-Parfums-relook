@@ -17,7 +17,7 @@ exports.createAdvice = async (req, res) => {
   const advice = await Advice.create({
     title,
     description,
-    video: req.file ? `/uploads/advices/${req.file.filename}` : null,
+    video: req.file ? req.file.path : null,
   });
 
   res.status(201).json(advice);
@@ -32,10 +32,15 @@ exports.updateAdvice = async (req, res) => {
   advice.description = req.body.description ?? advice.description;
 
   if (req.file) {
-    if (advice.video) {
-      fs.unlinkSync(path.join(process.cwd(), advice.video));
+    // If previous video was stored locally, try to remove it
+    if (advice.video && advice.video.startsWith("/uploads/")) {
+      try {
+        fs.unlinkSync(path.join(process.cwd(), advice.video));
+      } catch (e) {
+        // ignore
+      }
     }
-    advice.video = `/uploads/advices/${req.file.filename}`;
+    advice.video = req.file.path;
   }
 
   await advice.save();
@@ -56,7 +61,15 @@ exports.deleteAdvice = async (req, res) => {
   if (!advice) return res.status(404).json({ message: "Introuvable" });
 
   if (advice.video) {
-    fs.unlinkSync(path.join(process.cwd(), advice.video));
+    // If local file, remove it
+    if (advice.video.startsWith("/uploads/")) {
+      try {
+        fs.unlinkSync(path.join(process.cwd(), advice.video));
+      } catch (e) {
+        // ignore
+      }
+    }
+    // If Cloudinary, we keep it (optional: implement deletion by public_id)
   }
 
   await advice.deleteOne();

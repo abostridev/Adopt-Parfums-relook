@@ -1,29 +1,32 @@
 const multer = require("multer");
-const path = require("path");
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads/advices");
-  },
-  filename: (req, file, cb) => {
-    const ext = path.extname(file.originalname);
-    cb(null, `advice-${Date.now()}${ext}`);
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "adopt-parfums/advices",
+    resource_type: "video",
   },
 });
 
-const fileFilter = (req, file, cb) => {
-  if (file.mimetype.startsWith("video/")) {
-    cb(null, true);
-  } else {
-    cb(new Error("Seuls les fichiers vidéo sont autorisés"), false);
-  }
-};
-
 const uploadAdviceVideo = multer({
   storage,
-  fileFilter,
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype.startsWith("video/")) {
+      cb(null, true);
+    } else {
+      cb(new Error("Seuls les fichiers vidéo sont autorisés"), false);
+    }
+  },
   limits: {
-    fileSize: 100 * 1024 * 1024, // 100MB max
+    fileSize: 200 * 1024 * 1024, // 200MB max
   },
 });
 

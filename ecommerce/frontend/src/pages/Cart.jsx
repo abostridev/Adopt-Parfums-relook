@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../api/axios";
+import { getMediaUrl } from "../utils/media";
 import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
@@ -50,7 +51,7 @@ const Cart = () => {
                 className="flex gap-6 bg-white rounded-2xl p-6 shadow-sm"
               >
                 <img
-                  src={item.product.images?.[0]}
+                  src={getMediaUrl(item.product.images?.[0])}
                   alt={item.product.name}
                   className="w-28 h-32 object-cover rounded-xl"
                 />
