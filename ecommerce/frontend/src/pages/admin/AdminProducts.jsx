@@ -35,7 +35,7 @@ const AdminProducts = () => {
   }, [fetchProducts]);
 
   const deleteProduct = async (id) => {
-    if (!confirm("Supprimer ce produit définitivement ?")) return;
+    if (!confirm("Supprimer ce produit définitivement ?")) return
     await api.delete(`/admin/products/${id}`);
     fetchProducts();
   };
