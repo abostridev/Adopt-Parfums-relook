@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 
+
 const ProductCard = ({ product }) => {
+  const API_URL = import.meta.env.VITE_API_URL.replace("/api", "");
+
   return (
     <Link
       to={`/product/${product._id}`}
@@ -11,7 +14,7 @@ const ProductCard = ({ product }) => {
         {/* IMAGE */}
         <div className="relative h-[320px]  flex items-center justify-center">
           <img
-            src={`${import.meta.env.VITE_API_URL}${product.images[0]}`}
+            src={`${API_URL}${product.images[0]}`}
             alt={product.name}
           className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
           />

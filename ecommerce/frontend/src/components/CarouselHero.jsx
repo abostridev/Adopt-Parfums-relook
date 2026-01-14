@@ -4,6 +4,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { Link } from 'react-router-dom';
 
+const API_URL = import.meta.env.VITE_API_URL.replace("/api", "");
 const slides = [
   {
     title: 'L’élégance florale au quotidien',
@@ -13,7 +14,7 @@ const slides = [
     cta: 'Découvrir Femme',
     link: '/category/femme',
     image:
-      `${import.meta.env.VITE_API_URL}/uploads/products/product4-F.jpg`,
+      `${API_URL}/uploads/products/product4-F.jpg`,
   },
   {
     title: 'Des notes intenses et affirmées',
@@ -23,7 +24,7 @@ const slides = [
     cta: 'Découvrir Homme',
     link: '/category/homme',
     image:
-      `${import.meta.env.VITE_API_URL}/uploads/products/product9-H.jpg`,
+      `${API_URL}/uploads/products/product9-H.jpg`,
   },
   {
     title: 'La douceur en toute légèreté',
@@ -33,7 +34,7 @@ const slides = [
     cta: 'Découvrir Enfant',
     link: '/category/enfant',
     image:
-      `${import.meta.env.VITE_API_URL}/uploads/products/product15-E.jpg`,
+      `${API_URL}/uploads/products/product15-E.jpg`,
   },
 ];
 
