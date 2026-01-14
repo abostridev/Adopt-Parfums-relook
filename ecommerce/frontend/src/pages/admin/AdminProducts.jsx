@@ -242,6 +242,7 @@ const AdminProducts = () => {
                 fetchProducts();
                 setShowForm(false);
               }}
+              onClose={() => setShowForm(false)}
             />
           </div>
         </div>
