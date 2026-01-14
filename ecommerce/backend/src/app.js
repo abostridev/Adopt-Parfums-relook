@@ -41,7 +41,7 @@ app.use(passport.initialize());
 // Static uploads
 app.use(
   "/uploads",
-  express.static(path.resolve(__dirname, "../uploads"))
+  express.static(path.join(__dirname, "../uploads"))
 );
 
 
