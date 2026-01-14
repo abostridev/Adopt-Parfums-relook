@@ -56,6 +56,7 @@ const AdviceVideo = ({ src }) => {
           muted
           playsInline
           preload="metadata"
+          crossOrigin="anonymous"
           onLoadedMetadata={handleLoadedMetadata}
           onTimeUpdate={(e) =>
             setProgress(
