@@ -68,21 +68,21 @@ const ProductDetail = () => {
      AJOUT PANIER
   ========================= */
   const addToCart = async () => {
-  try {
-    await api.post("/cart/add", {
-      productId: product._id,
-      quantity,
-    });
+    try {
+      await api.post("/cart/add", {
+        productId: product._id,
+        quantity,
+      });
 
-    navigate("/cart");
-  } catch (err) {
-    if (err.response?.status === 401) {
-      navigate("/login", { state: { from: `/product/${id}` } });
-    } else {
-      alert("Erreur lors de l'ajout au panier.");
+      navigate("/cart");
+    } catch (err) {
+      if (err.response?.status === 401) {
+        navigate("/login", { state: { from: `/product/${id}` } });
+      } else {
+        alert("Erreur lors de l'ajout au panier.");
+      }
     }
-  }
-};
+  };
 
 
   return (
@@ -119,10 +119,11 @@ const ProductDetail = () => {
 
           <div className="flex items-center gap-4 mb-8">
             <span className="text-3xl font-semibold">{product.price} €</span>
-            {product.oldPrice && (
+            {product.price && product.oldPrice && (<>
+              <span className="text-3xl font-semibold">{product.price} €</span>
               <span className="line-through text-[#8A8A8A]">
                 {product.oldPrice} €
-              </span>
+              </span></>
             )}
           </div>
 

@@ -74,7 +74,7 @@ const ProductForm = ({ product, onSaved, onClose }) => {
             type="number"
             className="w-full mt-1 px-4 py-3 border rounded-xl"
             value={form.price}
-            onChange={(e) => setForm({ ...form, price: e.target.value })}
+            onChange={(e) => setForm({ ...form, oldPrice: e.target.value })}
           />
         </div>
 
@@ -85,7 +85,7 @@ const ProductForm = ({ product, onSaved, onClose }) => {
             className="w-full mt-1 px-4 py-3 border rounded-xl"
             value={form.oldPrice || ""}
             onChange={(e) =>
-              setForm({ ...form, oldPrice: e.target.value })
+              setForm({ ...form,price: e.target.value })
             }
           />
         </div>
