@@ -14,8 +14,8 @@ const { csrfProtection } = require("../middlewares/csrf");
 router.use(apiLimiter);
 
 
-router.post('/add', protect, validate(addToCartSchema), csrfProtection, addToCart);
+router.post('/add', protect, validate(addToCartSchema),  addToCart);
 router.get('/', protect, getCart);
-router.delete('/remove/:productId', protect, csrfProtection, removeFromCart);
+router.delete('/remove/:productId', protect, removeFromCart);
 
 module.exports = router;
