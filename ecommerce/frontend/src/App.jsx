@@ -1,5 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 
+import { useAuth } from "./context/AuthContext";
+import AppLoader from "./components/AppLoader";
+
 // Layouts
 import ClientLayout from "./layouts/ClientLayout";
 import AdminLayout from "./layouts/AdminLayout";
@@ -31,7 +34,9 @@ import AdminOrderDetail from "./pages/admin/AdminOrderDetail";
 import EditAdvice from "./pages/admin/EditAdvice";
 
 function App() {
-  return (
+  const { loading } = useAuth();
+  return (<>
+    {loading && <AppLoader />}
     <Routes>
 
       {/* ================= CLIENT ================= */}
@@ -96,6 +101,7 @@ function App() {
       </Route>
 
     </Routes>
+    </>
   );
 }
 

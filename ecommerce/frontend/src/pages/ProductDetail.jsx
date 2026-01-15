@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import api from "../api/axios";
 import { getMediaUrl } from "../utils/media";
 import ProductCard from "../components/ProductCard";
+import PremiumLoader from "../components/PremiumLoader";
+import { motion } from "framer-motion";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -12,6 +14,7 @@ const ProductDetail = () => {
   const [similarProducts, setSimilarProducts] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [adding, setAdding] = useState(false);
 
   /* =========================
      FETCH PRODUIT + SIMILAIRES
@@ -46,11 +49,12 @@ const ProductDetail = () => {
   }, [id]);
 
   if (loading) {
-    return <p className="text-center mt-20">Chargement…</p>;
+    return <PremiumLoader text="Découverte de la fragrance…" />;
   }
 
+
   if (!product) {
-    return <p className="text-center mt-20">Produit introuvable</p>;
+    return <p className="text-center my-20">Produit introuvable</p>;
   }
 
   /* =========================
@@ -73,19 +77,22 @@ const ProductDetail = () => {
         productId: product._id,
         quantity,
       });
-
+      setAdding(true);
       navigate("/cart");
     } catch (err) {
       if (err.response?.status === 401) {
         navigate("/login", { state: { from: `/product/${id}` } });
       } else {
-        console.error("Erreur ajout au panier", err);}
+        console.error("Erreur ajout au panier", err);
+      }
+    } finally {
+      setAdding(false);
     }
   };
 
 
   return (
-    <section className="bg-[#FAF7F5] py-12 md:py-20 px-4 space-y-24">
+    <section className="bg-background py-12 md:py-20 px-4 space-y-24">
 
       {/* =========================
           HERO PRODUIT
@@ -96,7 +103,7 @@ const ProductDetail = () => {
           <img
             src={getMediaUrl(product.images?.[0])}
             alt={product.name}
-            className="w-full h-[460px] md:h-[560px] object-cover"
+            className="w-full h-115 md:h-140 object-cover"
           />
           <span className="absolute top-6 left-6 bg-black/70 text-white text-xs px-4 py-1 rounded-full tracking-widest capitalize">
             {product.category}
@@ -119,7 +126,7 @@ const ProductDetail = () => {
           <div className="flex items-center gap-4 mb-8">
             {product.price && product.oldPrice && (<>
               <span className="text-3xl font-semibold">{product.price} €</span>
-              <span className="line-through text-[#8A8A8A]">
+              <span className="line-through text-muted">
                 {product.oldPrice} €
               </span></>
             )}
@@ -143,7 +150,7 @@ const ProductDetail = () => {
 
           {product.stock > 0 && (
             <div className="flex items-center gap-6 mb-10">
-              <span className="text-sm text-[#8A8A8A] font-semibold">
+              <span className="text-sm text-muted font-semibold">
                 Quantité :
               </span>
               <div className="flex items-center border rounded-full px-4 py-2">
@@ -156,10 +163,20 @@ const ProductDetail = () => {
 
           <button
             onClick={addToCart}
-            disabled={product.stock === 0}
+            disabled={adding || product.stock === 0}
             className="bg-black text-white py-4 px-10 rounded-full w-fit hover:scale-105 transition disabled:opacity-50"
           >
-            Ajouter au panier
+            {adding ? (
+              <motion.span
+                className="absolute inset-0 flex items-center justify-center"
+                animate={{ opacity: [0.4, 1, 0.4] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              >
+                Ajout en cours…
+              </motion.span>
+            ) : (
+              "Ajouter au panier"
+            )}
           </button>
         </div>
       </div>
@@ -177,14 +194,14 @@ const ProductDetail = () => {
           Sublimez votre fragrance
         </h3>
 
-        <p className="text-lg leading-relaxed text-[#1F1F1F]">
+        <p className="text-lg leading-relaxed text-text">
           Appliquez votre parfum sur les points de pulsation :
           le cou, les poignets et derrière les oreilles.
           Pour une tenue optimale, vaporisez sur une peau
           propre et légèrement hydratée.
         </p>
 
-        <p className="mt-4 text-sm text-[#8A8A8A] italic">
+        <p className="mt-4 text-sm text-muted italic">
           Astuce : ne frottez jamais vos poignets après application.
         </p>
 
