@@ -1,27 +1,33 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/axios";
+import { useAuth } from "../../context/AuthContext";
 
 const AdminLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
     try {
-      // 1️⃣ login → pose le refreshToken (cookie)
-      await api.post("/auth/login", { email, password });
+      const res = await api.post("/auth/login", { email, password });
 
-      // 2️⃣ refresh → crée l’accessToken en mémoire
-      await api.post("/auth/refresh");
+      // hydrate auth global
+      await login(res.data.accessToken);
 
-      // 3️⃣ redirection
+      // sécurité admin
+      if (res.data.role && res.data.role !== "admin") {
+        setError("Accès réservé à l’administration");
+        return;
+      }
+
       navigate("/admin", { replace: true });
-
     } catch (err) {
       console.error(err);
       setError("Accès refusé ou identifiants invalides");
