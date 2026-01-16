@@ -5,6 +5,8 @@ import { getMediaUrl } from "../utils/media";
 import ProductCard from "../components/ProductCard";
 import PremiumLoader from "../components/PremiumLoader";
 import { motion } from "framer-motion";
+import { useCart } from "../context/CartContext";
+import PerfumeMistLoader from "../components/PerfumeMistLoader";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -72,6 +74,7 @@ const ProductDetail = () => {
   /* =========================
      AJOUT PANIER
   ========================= */
+  const { fetchCart } = useCart();
   const addToCart = async () => {
     try {
       await api.post("/cart/add", {
@@ -79,6 +82,7 @@ const ProductDetail = () => {
         quantity,
       });
       setAdding(true);
+      await fetchCart();
       navigate("/cart");
     } catch (err) {
       if (err.response?.status === 401) {

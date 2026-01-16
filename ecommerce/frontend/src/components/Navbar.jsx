@@ -4,11 +4,13 @@ import { useEffect, useState } from "react";
 import api from "../api/axios";
 import { useAuth } from "../context/AuthContext";
 import SearchBar from "./SearchBar";
+import { useCart } from "../context/CartContext";
+
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [userMenu, setUserMenu] = useState(false);
-  const [cartCount, setCartCount] = useState(0);
+  const { cartCount } = useCart();
   const [orderCount, setOrderCount] = useState(0);
   const [searchOpen, setSearchOpen] = useState(false);
 
@@ -21,26 +23,7 @@ const Navbar = () => {
     window.scrollTo(0, 0); // Optionnel : défile vers le haut
   };
 
-  /* =====================
-     PANIER
-  ====================== */
-  useEffect(() => {
-    if (!user) {
-      setCartCount(0);
-      return;
-    }
 
-    const fetchCart = async () => {
-      try {
-        const res = await api.get("/cart");
-        setCartCount(res.data.length);
-      } catch {
-        setCartCount(0);
-      }
-    };
-
-    fetchCart();
-  }, [user]);
 
 
   /* =====================
@@ -199,8 +182,8 @@ const Navbar = () => {
       )}
       {/* input de Recherche */}
       {searchOpen && (
-  <SearchBar onClose={() => setSearchOpen(false)} />
-)}
+        <SearchBar onClose={() => setSearchOpen(false)} />
+      )}
 
 
     </header>
