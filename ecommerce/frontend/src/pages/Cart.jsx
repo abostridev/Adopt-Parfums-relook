@@ -8,17 +8,21 @@ const Cart = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchCart = async () => {
+    const loadData = async () => {
       try {
         const res = await api.get("/cart");
-        setCart(res.data);
+        setCart(res.data || []);
       } catch (err) {
         console.error("Erreur chargement panier", err);
+        setCart([]);
       }
     };
 
-    fetchCart();
+    loadData();
   }, []);
+
+
+
 
   const removeItem = async (productId) => {
     try {
@@ -29,10 +33,21 @@ const Cart = () => {
     }
   };
 
-  const total = cart.reduce(
-    (sum, item) => sum + item.product.price * item.quantity,
-    0
+  const total = Array.isArray(cart)
+    ? cart.reduce(
+      (sum, item) => sum + item.product.price * item.quantity,
+      0
+    )
+    : 0;
+
+  if (!cart) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        Chargement du panier...
+      </div>
   );
+}
+
 
   return (
     <section className="bg-[#FAF7F5] min-h-screen py-16 px-4">
@@ -41,6 +56,7 @@ const Cart = () => {
         {/* Produits */}
         <div className="md:col-span-2 space-y-8">
           <h1 className="text-4xl font-serif mb-8">Votre panier</h1>
+          
 
           {cart.length === 0 ? (
             <p className="text-[#8A8A8A]">Votre panier est vide</p>
