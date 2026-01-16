@@ -1,5 +1,5 @@
 import PhoneInput from "react-phone-number-input";
-import "react-phone-number-input/index.css";
+import "react-phone-number-input/style.css";
 import { isValidPhoneNumber } from "react-phone-number-input";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
