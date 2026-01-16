@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 
 import { useAuth } from "./context/AuthContext";
 import AppLoader from "./components/AppLoader";
+import PerfumeMistLoader from "./components/PerfumeMistLoader";
 
 // Layouts
 import ClientLayout from "./layouts/ClientLayout";
@@ -33,10 +34,14 @@ import AdminConseils from "./pages/admin/Conseils";
 import AdminOrderDetail from "./pages/admin/AdminOrderDetail";
 import EditAdvice from "./pages/admin/EditAdvice";
 
+
+
+
 function App() {
   const { loading } = useAuth();
   return (<>
-    {loading && <AppLoader />}
+    {/*loading && <AppLoader />*/}
+    {loading && <PerfumeMistLoader text="Chargement de l'application…" />}
     <Routes>
 
       {/* ================= CLIENT ================= */}

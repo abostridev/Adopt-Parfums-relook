@@ -49,8 +49,9 @@ const ProductDetail = () => {
   }, [id]);
 
   if (loading) {
-    return <PremiumLoader text="Découverte de la fragrance…" />;
-  }
+  return <PerfumeMistLoader text="La fragrance se révèle…" />;
+}
+
 
 
   if (!product) {
