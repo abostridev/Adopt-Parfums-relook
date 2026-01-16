@@ -9,6 +9,8 @@ export const AuthProvider = ({ children }) => {
 
   // 🔄 INIT AUTH (CRUCIAL EN PROD)
   useEffect(() => {
+    let isMounted = true;
+
     const initAuth = async () => {
       try {
         const res = await api.post("/auth/refresh");
@@ -16,16 +18,19 @@ export const AuthProvider = ({ children }) => {
 
         // ⚠️ NE PAS FORCER LE HEADER
         const me = await api.get("/users/me");
-        setUser(me.data);
+        if (isMounted) setUser(me.data);
       } catch {
-        setUser(null);
+        if (isMounted) setUser(null);
         setAccessToken(null);
       } finally {
-        setLoading(false);
+        setTimeout(() => {
+          if (isMounted) setLoading(false);
+        }, 800);
       }
     };
 
     initAuth();
+    return () => { isMounted = false };
   }, []);
 
   // 🔐 LOGIN
