@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
       } finally {
         setTimeout(() => {
           if (isMounted) setLoading(false);
-        }, 800);
+        }, 1000);
       }
     };
 
@@ -60,7 +60,7 @@ export const AuthProvider = ({ children }) => {
         loading,
       }}
     >
-      {!loading && children}
+      {children}
     </AuthContext.Provider>
   );
 };

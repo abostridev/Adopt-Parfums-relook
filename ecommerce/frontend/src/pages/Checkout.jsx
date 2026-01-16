@@ -1,11 +1,17 @@
-import { useEffect, useState } from "react";
-import api from "../api/axios";
+import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/index.css";
+import { isValidPhoneNumber } from "react-phone-number-input";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import api from "../api/axios";
+import { useCart } from "../context/CartContext";
+import { useOrders } from "../context/OrderContext";
 
 const Checkout = () => {
-  const [cart, setCart] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const { cart, fetchCart } = useCart();
+  const { fetchOrders } = useOrders();
 
+  const [loading, setLoading] = useState(false);
   const [shippingAddress, setShippingAddress] = useState({
     fullName: "",
     phone: "",
@@ -15,22 +21,6 @@ const Checkout = () => {
   });
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchCart = async () => {
-      const token = localStorage.getItem("token");
-
-      const res = await api.get("/cart", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      setCart(res.data);
-    };
-
-    fetchCart();
-  }, []);
 
   const total = cart.reduce(
     (sum, item) => sum + item.product.price * item.quantity,
@@ -46,18 +36,18 @@ const Checkout = () => {
 
   const confirmOrder = async () => {
     try {
-      setLoading(true);
-      const token = localStorage.getItem("token");
+      if (!isValidPhoneNumber(shippingAddress.phone || "")) {
+        alert("Veuillez entrer un numéro de téléphone valide");
+        return;
+      }
 
-      await api.post(
-        "/orders",
-        { shippingAddress },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      setLoading(true);
+
+      await api.post("/orders", { shippingAddress });
+
+      // 🔁 SYNC GLOBAL
+      await fetchOrders();
+      await fetchCart();
 
       navigate("/orders");
     } catch (error) {
@@ -75,7 +65,7 @@ const Checkout = () => {
           Finaliser votre commande
         </h1>
 
-        {/* 🧾 Récap panier */}
+        {/* 🧾 PANIER */}
         <div className="space-y-6 mb-12">
           {cart.map((item) => (
             <div
@@ -83,9 +73,7 @@ const Checkout = () => {
               className="flex justify-between items-center border-b pb-4"
             >
               <div>
-                <p className="font-serif">
-                  {item.product.name}
-                </p>
+                <p className="font-serif">{item.product.name}</p>
                 <p className="text-sm text-[#8A8A8A]">
                   Quantité : {item.quantity}
                 </p>
@@ -97,71 +85,51 @@ const Checkout = () => {
           ))}
         </div>
 
-        {/* 💰 Total */}
+        {/* 💰 TOTAL */}
         <div className="flex justify-between text-xl font-semibold mb-14">
           <span>Total</span>
           <span>{total.toFixed(2)} €</span>
         </div>
 
-        {/* 🚚 Adresse de livraison */}
+        {/* 🚚 ADRESSE */}
         <h2 className="text-2xl font-serif mb-6">
           Adresse de livraison
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <input
-            type="text"
-            name="fullName"
-            placeholder="Nom complet"
-            value={shippingAddress.fullName}
-            onChange={handleChange}
-            className="border p-4 rounded-lg"
-          />
+          <input name="fullName" placeholder="Nom complet" onChange={handleChange} className="border p-4 rounded-lg" />
+          <div className="flex flex-col gap-1">
+            <PhoneInput
+              international
+              defaultCountry="TG"
+              value={shippingAddress.phone}
+              onChange={(value) =>
+                setShippingAddress({ ...shippingAddress, phone: value })
+              }
+              placeholder="Numéro de téléphone"
+              className="phone-input"
+            />
 
-          <input
-            type="tel"
-            name="phone"
-            placeholder="Téléphone"
-            value={shippingAddress.phone}
-            onChange={handleChange}
-            className="border p-4 rounded-lg"
-          />
+            {shippingAddress.phone &&
+              !isValidPhoneNumber(shippingAddress.phone) && (
+                <span className="text-xs text-red-500">
+                  Numéro de téléphone invalide
+                </span>
+              )}
+          </div>
 
-          <input
-            type="text"
-            name="city"
-            placeholder="Ville"
-            value={shippingAddress.city}
-            onChange={handleChange}
-            className="border p-4 rounded-lg"
-          />
-
-          <input
-            type="text"
-            name="country"
-            placeholder="Pays"
-            value={shippingAddress.country}
-            onChange={handleChange}
-            className="border p-4 rounded-lg"
-          />
+          <input name="city" placeholder="Ville" onChange={handleChange} className="border p-4 rounded-lg" />
+          <input name="country" placeholder="Pays" onChange={handleChange} className="border p-4 rounded-lg" />
         </div>
 
         <textarea
           name="address"
           placeholder="Adresse complète"
-          value={shippingAddress.address}
-          onChange={handleChange}
           rows="3"
+          onChange={handleChange}
           className="border p-4 rounded-lg w-full mb-10"
         />
 
-        {/* ℹ️ Message rassurant */}
-        <p className="text-sm text-center text-[#8A8A8A] mb-8">
-          Aucun paiement requis pour le moment.  
-          Vous pourrez finaliser plus tard.
-        </p>
-
-        {/* ✅ CTA */}
         <button
           onClick={confirmOrder}
           disabled={loading || cart.length === 0}
@@ -169,7 +137,6 @@ const Checkout = () => {
         >
           {loading ? "Commande en cours..." : "Confirmer la commande"}
         </button>
-
       </div>
     </section>
   );

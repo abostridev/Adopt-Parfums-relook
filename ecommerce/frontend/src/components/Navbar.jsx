@@ -5,15 +5,16 @@ import api from "../api/axios";
 import { useAuth } from "../context/AuthContext";
 import SearchBar from "./SearchBar";
 import { useCart } from "../context/CartContext";
+import { useOrders } from "../context/OrderContext";
 
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [userMenu, setUserMenu] = useState(false);
   const { cartCount } = useCart();
-  const [orderCount, setOrderCount] = useState(0);
-  const [searchOpen, setSearchOpen] = useState(false);
 
+  const { orderCount } = useOrders();
+  const [searchOpen, setSearchOpen] = useState(false);
 
   const { user, logout } = useAuth();
   const navigate = useNavigate();

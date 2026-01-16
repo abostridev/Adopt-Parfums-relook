@@ -39,9 +39,12 @@ import EditAdvice from "./pages/admin/EditAdvice";
 
 function App() {
   const { loading } = useAuth();
+
+  if (loading) {
+    return  <PerfumeMistLoader text="Chargement de l'application…" />
+   }
+
   return (<>
-    {/*loading && <AppLoader />*/}
-    {loading && <PerfumeMistLoader text="Chargement de l'application…" />}
     <Routes>
 
       {/* ================= CLIENT ================= */}

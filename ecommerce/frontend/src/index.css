@@ -18,3 +18,27 @@
 h1, h2, h3 {
   @apply font-title;
 }
+
+.phone-input {
+  --PhoneInputCountryFlag-height: 18px;
+  --PhoneInputCountrySelect-marginRight: 0.75rem;
+}
+
+.PhoneInput {
+  width: 100%;
+}
+
+.PhoneInputInput {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid #e5e7eb;
+  font-size: 1rem;
+}
+
+.PhoneInputInput:focus {
+  outline: none;
+  border-color: #000;
+}
+
+
