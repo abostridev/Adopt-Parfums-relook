@@ -17,11 +17,14 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(true);
   const [adding, setAdding] = useState(false);
+  const { fetchCart } = useCart();
+
 
   /* =========================
      FETCH PRODUIT + SIMILAIRES
   ========================= */
   useEffect(() => {
+    
     const fetchData = async () => {
       try {
         setLoading(true);
@@ -74,7 +77,7 @@ const ProductDetail = () => {
   /* =========================
      AJOUT PANIER
   ========================= */
-  const { fetchCart } = useCart();
+  
   const addToCart = async () => {
     try {
       await api.post("/cart/add", {
