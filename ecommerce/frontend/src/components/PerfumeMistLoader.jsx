@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 const PerfumeMistLoader = ({ text = "Diffusion de la fragrance…" }) => {
   return (
     // w-full et items-center garantissent le centrage horizontal
-    <div className="w-full h-fit py-20 flex flex-col items-center justify-center bg-transparent">
+    <div className="w-full h-fit  flex flex-col items-center justify-center bg-transparent">
       
       {/* Conteneur relatif pour grouper Flacon + Brume */}
       <div className="relative flex flex-col items-center">

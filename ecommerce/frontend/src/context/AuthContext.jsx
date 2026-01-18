@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
       } finally {
         setTimeout(() => {
           if (isMounted) setLoading(false);
-        }, 600);
+        }, 800);
       }
     };
 
