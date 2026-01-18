@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../api/axios";
 import { getMediaUrl } from "../utils/media";
 import { useNavigate } from "react-router-dom";
+import PremiumLoader from "../components/PremiumLoader";
 
 const Cart = () => {
   const [cart, setCart] = useState([]);
@@ -42,9 +43,10 @@ const Cart = () => {
 
   if (!cart) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      /*<div className="min-h-screen flex items-center justify-center">
         Chargement du panier...
-      </div>
+      </div> */
+      <PremiumLoader text="Chargement du panier" />
   );
 }
 

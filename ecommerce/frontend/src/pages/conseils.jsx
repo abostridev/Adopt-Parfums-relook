@@ -124,7 +124,7 @@ const Conseils = () => {
                       : "md:rounded-r-3xl md:rounded-l-none"}
                     md:border-t-1`}
                 >
-                  <div className="w-full h-full rounded-2xl overflow-hidden shadow-inner bg-gray-100">
+                  <div className="w-full h-full rounded-2xl overflow-hidden shadow-inner ">
                     {advice.video && (
                       <AdviceVideo src={getMediaUrl(advice.video)} />
                     )}
