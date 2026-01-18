@@ -1,28 +1,27 @@
 import React from 'react';
-// Importez Link si vous utilisez react-router-dom
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const categories = [
   {
     id: 'femme',
     title: 'Parfums pour elle',
     description: 'Des fragrances délicates et audacieuses, pensées pour révéler votre élégance.',
-    image: 'https://images.unsplash.com/photo-1615634260167-c8cdede054de?auto=format&fit=crop&w=1200&q=80',
-    link: '/categories/femme' // Ajoutez le lien ici
+    image: 'https://images.unsplash.com',
+    path: '/boutique/femme' // Définissez vos routes ici
   },
   {
     id: 'homme',
     title: 'Parfums pour lui',
     description: 'Des notes intenses et raffinées pour affirmer votre caractère.',
-    image: 'https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=1200&q=80',
-    link: '/categories/homme'
+    image: 'https://images.unsplash.com',
+    path: '/boutique/homme'
   },
   {
     id: 'enfant',
     title: 'Pour les plus jeunes',
     description: 'Des senteurs douces et légères, adaptées aux plus petits.',
-    image: 'https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=1200&q=80',
-    link: '/categories/enfant'
+    image: 'https://images.unsplash.com',
+    path: '/boutique/enfant'
   },
 ];
 
@@ -30,31 +29,32 @@ const ExploreCategories = () => {
   return (
     <section className="bg-[#F1E7DF] py-20 px-4 border-t border-b border-[#E3D3C8]">
       <div className="max-w-7xl mx-auto">
+        {/* Titre */}
         <h2 className="text-3xl md:text-4xl font-light text-center text-text mb-14">
           Explorez nos univers
         </h2>
 
+        {/* Grille */}
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
           {categories.map((cat) => (
-            /* On transforme la div principale en lien pour que toute la carte soit cliquable */
-            <a
+            <Link
               key={cat.id}
-              href={cat.link}
+              to={cat.path}
               className="group relative overflow-hidden rounded-3xl shadow-xl cursor-pointer block"
             >
-              {/* Image */}
+              {/* Image avec zoom au survol */}
               <img
                 src={cat.image}
                 alt={cat.title}
                 className="h-110 w-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
 
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent transition-opacity duration-500" />
+              {/* Overlay dégradé */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 transition-opacity duration-500" />
 
-              {/* Contenu */}
+              {/* Contenu textuel */}
               <div className="absolute inset-0 flex flex-col justify-end p-7 text-white">
-                <div className="backdrop-blur-sm bg-black/30 rounded-2xl p-5">
+                <div className="backdrop-blur-md bg-black/20 rounded-2xl p-5 border border-white/10">
                   <h3 className="text-2xl font-semibold mb-2">
                     {cat.title}
                   </h3>
@@ -66,7 +66,7 @@ const ExploreCategories = () => {
                   </span>
                 </div>
               </div>
-            </a>
+            </Link>
           ))}
         </div>
       </div>
