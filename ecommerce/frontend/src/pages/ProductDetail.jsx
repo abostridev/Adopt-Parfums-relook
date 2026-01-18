@@ -131,7 +131,7 @@ const ProductDetail = () => {
           </p>
 
           <div className="flex items-center gap-4 mb-8">
-            {!product.price && product.oldPrice && (
+            {product.price  && (
               <span className="text-3xl font-semibold">{product.oldPrice} €</span>
             )}
             {product.price && product.oldPrice && (<>

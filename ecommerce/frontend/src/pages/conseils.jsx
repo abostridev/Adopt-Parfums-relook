@@ -115,7 +115,7 @@ const Conseils = () => {
 
                 {/* BLOC VIDÉO */}
                 <div 
-                  className={`md:w-1/2 w-full p-4 border border-gray-400 flex items-center justify-center bg-white
+                  className={`md:w-1/2 w-full px-4 py-6 border border-gray-400 flex items-center justify-center bg-white
                     rounded-b-3xl 
                     ${isReverse 
                       ? "md:rounded-l-3xl md:rounded-r-none" 

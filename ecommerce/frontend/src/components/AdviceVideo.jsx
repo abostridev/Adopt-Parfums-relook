@@ -67,7 +67,7 @@ const AdviceVideo = ({ src }) => {
 
         {/* PROGRESS BAR */}
         {ratio && (
-          <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-white/20">
+          <div className="absolute bottom-0 left-0 right-0 h-0.75 bg-white/20">
             <div
               className="h-full bg-white transition-all"
               style={{ width: `${progress}%` }}
