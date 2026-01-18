@@ -2,27 +2,27 @@ import { motion } from "framer-motion";
 
 const PerfumeMistLoader = ({ text = "Diffusion de la fragrance…" }) => {
   return (
-    // h-fit supprime l'espace vide en bas
-    <div className="h-fit py-10 flex flex-col items-center justify-center bg-transparent relative">
-
-      {/* Flacon stylisé */}
-      <div className="w-14 h-20 border-2 border-black/40 rounded-b-2xl rounded-t-md relative mb-6">
-        <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-6 h-4 border-2 border-black/40 rounded-sm bg-background" />
+    // w-full et items-center garantissent le centrage horizontal
+    <div className="w-full h-fit py-20 flex flex-col items-center justify-center bg-transparent">
+      
+      {/* Conteneur relatif pour grouper Flacon + Brume */}
+      <div className="relative flex flex-col items-center">
         
-        {/* Conteneur de Brume (Placé juste au-dessus du bouchon) */}
-        <div className="absolute -top-16 left-1/2 -translate-x-1/2 flex gap-2 pointer-events-none z-10">
+        {/* Brume (Placée en absolute par rapport au flacon) */}
+        <div className="absolute -top-16 flex gap-3 pointer-events-none">
           {[...Array(3)].map((_, i) => (
             <motion.span
               key={i}
-              className="w-1.5 h-10 bg-black/20 rounded-full blur-[1px]"
-              initial={{ opacity: 0, y: 20 }}
+              // Couleur plus colorée (slate-400) mais reste dans le thème
+              className="w-2 h-12 bg-slate-400/50 rounded-full blur-[2px]"
+              initial={{ opacity: 0, y: 10 }}
               animate={{
-                y: [20, -40], // Monte vers le haut
-                opacity: [0, 0.7, 0], // Apparaît puis disparaît
-                scaleX: [1, 1.5, 2], // S'élargit en montant
+                y: [10, -50],
+                opacity: [0, 0.8, 0],
+                scale: [1, 1.8],
               }}
               transition={{
-                duration: 2,
+                duration: 2.2,
                 delay: i * 0.4,
                 repeat: Infinity,
                 ease: "easeOut",
@@ -30,11 +30,18 @@ const PerfumeMistLoader = ({ text = "Diffusion de la fragrance…" }) => {
             />
           ))}
         </div>
+
+        {/* Flacon stylisé */}
+        <div className="w-14 h-20 border-2 border-black/60 rounded-b-2xl rounded-t-md relative bg-white/10 backdrop-blur-sm">
+          {/* Bouchon */}
+          <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-7 h-4 border-2 border-black/60 rounded-sm bg-white" />
+        </div>
+
       </div>
 
-      {/* Texte */}
+      {/* Texte centré avec marge équilibrée */}
       <motion.p
-        className="mt-6 font-serif text-lg tracking-wide text-black/80 text-center"
+        className="mt-12 font-serif text-lg tracking-wide text-black/80 text-center px-4"
         animate={{ opacity: [0.4, 1, 0.4] }}
         transition={{ duration: 2.5, repeat: Infinity }}
       >
