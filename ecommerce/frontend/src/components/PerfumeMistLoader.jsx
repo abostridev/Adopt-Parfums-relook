@@ -4,7 +4,7 @@ const PerfumeMistLoader = ({ text = "Diffusion de la fragrance…" }) => {
   return (
     // "w-screen" force le composant à occuper toute la largeur du navigateur
     // "items-center" et "justify-center" centrent le contenu horizontalement et verticalement
-    <div className="w-screen h-fit py-100 flex flex-col items-center justify-center bg-transparent">
+    <div className="w-screen h-fit py-70 flex flex-col items-center justify-center bg-transparent">
       
       {/* Conteneur du flacon + brume */}
       <div className="relative flex flex-col items-center">
