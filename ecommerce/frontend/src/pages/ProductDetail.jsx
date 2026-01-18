@@ -135,7 +135,6 @@ const ProductDetail = () => {
               <span className="text-3xl font-semibold">{product.price} €</span>
             )}
             {product.price && product.oldPrice && (<>
-              <span className="text-3xl font-semibold">{product.price} €</span>
               <span className="line-through text-muted">
                 {product.oldPrice} €
               </span></>
