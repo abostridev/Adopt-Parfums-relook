@@ -116,15 +116,13 @@ const Conseils = () => {
                 {/* BLOC VIDÉO */}
                 <div 
                   className={`md:w-1/2 w-full p-4 border border-gray-400 flex items-center justify-center bg-white
-                    /* Mobile: Arrondi Bas */
                     rounded-b-3xl 
-                    /* Desktop: Arrondi s'adapte au reverse */
                     ${isReverse 
                       ? "md:rounded-l-3xl md:rounded-r-none" 
                       : "md:rounded-r-3xl md:rounded-l-none"}
                     md:border-t-1`}
                 >
-                  <div className="w-full h-full rounded-2xl overflow-hidden shadow-inner ">
+                  <div className="w-full h-full overflow-hidden shadow-inner ">
                     {advice.video && (
                       <AdviceVideo src={getMediaUrl(advice.video)} />
                     )}
