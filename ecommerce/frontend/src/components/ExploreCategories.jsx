@@ -6,21 +6,21 @@ const categories = [
     id: 'femme',
     title: 'Parfums pour elle',
     description: 'Des fragrances délicates et audacieuses, pensées pour révéler votre élégance.',
-    image: 'https://images.unsplash.com',
+    image: 'https://images.unsplash.com/photo-1615634260167-c8cdede054de?auto=format&fit=crop&w=1200&q=80',
     path: '/boutique/femme' // Définissez vos routes ici
   },
   {
     id: 'homme',
     title: 'Parfums pour lui',
     description: 'Des notes intenses et raffinées pour affirmer votre caractère.',
-    image: 'https://images.unsplash.com',
+    image: 'https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=1200&q=80',
     path: '/boutique/homme'
   },
   {
     id: 'enfant',
     title: 'Pour les plus jeunes',
     description: 'Des senteurs douces et légères, adaptées aux plus petits.',
-    image: 'https://images.unsplash.com',
+    image: 'https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=1200&q=80',
     path: '/boutique/enfant'
   },
 ];

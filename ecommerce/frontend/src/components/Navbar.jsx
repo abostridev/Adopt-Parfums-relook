@@ -57,6 +57,8 @@ const Navbar = () => {
     setUserMenu(false);
     navigate("/login", { replace: true });
   };
+  const activeStyle = "text-secondary font-semibold border-b-2 border-secondary pb-1";
+  const normalStyle = "hover:text-secondary transition-colors pb-1";
 
   return (
     <header className="bg-[background] border-b sticky top-0 z-50">
@@ -70,17 +72,56 @@ const Navbar = () => {
 
         {/* MENU DESKTOP */}
         <nav className="hidden lg:flex items-center gap-8 text-sm">
-          <Link to="/category/femme" className="hover:text-secondary" onClick={window.scrollTo(0, 0)}>Femme</Link>
-          <Link to="/category/homme" className="hover:text-secondary" onClick={window.scrollTo(0, 0)}>Homme</Link>
-          <Link to="/category/enfant" className="hover:text-secondary" onClick={window.scrollTo(0, 0)}>Enfant</Link>
-          <Link to="/orders" className=" relative font-title block border-b border-t border-secondary bg-amber-50 py-1 px-2 font-semibold hover:text-secondary" onClick={window.scrollTo(0, 0)}> Mes commandes
+          <NavLink
+            to="/category/femme"
+            className={({ isActive }) => isActive ? activeStyle : normalStyle}
+            onClick={() => window.scrollTo(0, 0)}
+          >
+            Femme
+          </NavLink>
+
+          <NavLink
+            to="/category/homme"
+            className={({ isActive }) => isActive ? activeStyle : normalStyle}
+            onClick={() => window.scrollTo(0, 0)}
+          >
+            Homme
+          </NavLink>
+
+          <NavLink
+            to="/category/enfant"
+            className={({ isActive }) => isActive ? activeStyle : normalStyle}
+            onClick={() => window.scrollTo(0, 0)}
+          >
+            Enfant
+          </NavLink>
+
+          <NavLink
+            to="/orders"
+            className={({ isActive }) =>
+              `relative font-title block border-b border-t py-1 px-2 font-semibold transition-colors ${isActive ? "bg-secondary text-white border-secondary" : "bg-amber-50 border-secondary text-black"
+              }`
+            }
+            onClick={() => window.scrollTo(0, 0)}
+          >
+            Mes commandes
             {user && orderCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-secondary text-white text-sm font-title w-5 h-5 rounded-full flex items-center justify-center">
+              <span className={`absolute -top-2 -right-2 text-sm font-title w-5 h-5 rounded-full flex items-center justify-center ${"bg-secondary text-white border border-white"
+                }`}>
                 {orderCount}
               </span>
             )}
-          </Link>
-          <Link to="/conseils" className="bg-secondary text-white px-4 py-2 rounded-full text-sm" > Conseils & Astuces </Link>
+          </NavLink>
+
+          <NavLink
+            to="/conseils"
+            className={({ isActive }) =>
+              `px-4 py-2 rounded-full text-sm transition-all ${isActive ? "bg-black text-white" : "bg-secondary text-white"
+              }`
+            }
+          >
+            Conseils & Astuces
+          </NavLink>
         </nav>
         <div className="flex items-center gap-4 relative">
           <button onClick={() => setSearchOpen(true)}>
@@ -169,16 +210,28 @@ const Navbar = () => {
       {/* MENU MOBILE */}
       {open && (
         <nav className="lg:hidden bg-[background] border-t px-6 py-4 space-y-4">
-          <Link to="/category/femme" className="block" onClick={() => closeMenu()}>Femme</Link>
-          <Link to="/category/homme" className="block" onClick={() => closeMenu()}>Homme</Link>
-          <Link to="/category/enfant" className="block" onClick={() => closeMenu()}>Enfant</Link>
-          <Link to="/orders" className="border-b border-t bg-amber-50 py-2 font-semibold flex flex-row" onClick={() => closeMenu()}>
-            <span>Mes commandes </span> {user && orderCount > 0 && (
-              <span className="  bg-secondary ml-2 text-white text-sm text-center font-title w-5 h-5 rounded-full flex  items-center justify-center">
-                {orderCount}
-              </span>
-            )}</Link>
-          <Link to="/conseils" className="block bg-secondary text-white px-4 py-2 rounded-full text-center" onClick={() => closeMenu()}> Conseils & Astuces </Link>
+          <NavLink
+            to="/category/femme"
+            className={({ isActive }) => `block py-2 ${isActive ? "text-secondary font-bold" : ""}`}
+            onClick={() => closeMenu()}
+          >
+            Femme
+          </NavLink>
+          <NavLink
+            to="/category/homme"
+            className={({ isActive }) => `block py-2 ${isActive ? "text-secondary font-bold" : ""}`}
+            onClick={() => closeMenu()}
+          >
+            Homme
+          </NavLink>
+          <NavLink
+            to="/category/enfant"
+            className={({ isActive }) => `block py-2 ${isActive ? "text-secondary font-bold" : ""}`}
+            onClick={() => closeMenu()}
+          >
+            Enfant
+          </NavLink>
+          {/* ... etc pour les autres liens mobiles */}
         </nav>
       )}
       {/* input de Recherche */}
