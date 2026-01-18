@@ -1,4 +1,4 @@
-import { Link,NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { ShoppingCart, Search, Menu, User, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import api from "../api/axios";
@@ -96,18 +96,10 @@ const Navbar = () => {
             Enfant
           </NavLink>
 
-          <NavLink
-            to="/orders"
-            className={({ isActive }) =>
-              `relative font-title block border-b border-t py-1 px-2 font-semibold transition-colors ${isActive ? "bg-secondary text-white border-secondary" : "bg-amber-50 border-secondary text-black"
-              }`
-            }
-            onClick={() => window.scrollTo(0, 0)}
-          >
-            Mes commandes
+
+          <NavLink to="/orders" className=" relative font-title block border-b border-t border-secondary bg-amber-50 py-1 px-2 font-semibold hover:text-secondary" onClick={window.scrollTo(0, 0)}> Mes commandes
             {user && orderCount > 0 && (
-              <span className={`absolute -top-2 -right-2 text-sm font-title w-5 h-5 rounded-full flex items-center justify-center ${"bg-secondary text-white border border-white"
-                }`}>
+              <span className="absolute -top-2 -right-2 bg-secondary text-white text-sm font-title w-5 h-5 rounded-full flex items-center justify-center">
                 {orderCount}
               </span>
             )}
@@ -116,12 +108,13 @@ const Navbar = () => {
           <NavLink
             to="/conseils"
             className={({ isActive }) =>
-              `px-4 py-2 rounded-full text-sm transition-all ${isActive ? "bg-black text-white" : "bg-secondary text-white"
+              `px-4 py-2 rounded-full text-sm transition-all ${isActive ? "bg-secondary text-black" : "bg-secondary/70 text-white"
               }`
             }
           >
             Conseils & Astuces
           </NavLink>
+
         </nav>
         <div className="flex items-center gap-4 relative">
           <button onClick={() => setSearchOpen(true)}>
@@ -231,7 +224,13 @@ const Navbar = () => {
           >
             Enfant
           </NavLink>
-          {/* ... etc pour les autres liens mobiles */}
+          <Link to="/orders" className="border-b border-t bg-amber-50 py-2 font-semibold flex flex-row" onClick={() => closeMenu()}>
+            <span>Mes commandes </span> {user && orderCount > 0 && (
+              <span className="  bg-secondary ml-2 text-white text-sm text-center font-title w-5 h-5 rounded-full flex  items-center justify-center">
+                {orderCount}
+              </span>
+            )}</Link>
+          <NavLink to="/conseils" className="block bg-secondary text-white px-4 py-2 rounded-full text-center" onClick={() => closeMenu()}> Conseils & Astuces </NavLink>
         </nav>
       )}
       {/* input de Recherche */}
