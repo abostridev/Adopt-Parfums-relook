@@ -57,8 +57,8 @@ const Navbar = () => {
     setUserMenu(false);
     navigate("/login", { replace: true });
   };
-  const activeStyle = "text-secondary font-semibold border-b-2 border-secondary pb-1";
-  const normalStyle = "hover:text-secondary transition-colors pb-1";
+  const activeStyle = "text-secondary font-semibold font-title  border-b-2 border-secondary pb-1 text-lg";
+  const normalStyle = "hover:text-secondary transition-colors pb-1 text-sm";
 
   return (
     <header className="bg-[background] border-b sticky top-0 z-50">
@@ -71,7 +71,7 @@ const Navbar = () => {
         </Link>
 
         {/* MENU DESKTOP */}
-        <nav className="hidden lg:flex items-center gap-8 text-sm">
+        <nav className="hidden lg:flex items-center gap-8 ">
           <NavLink
             to="/category/femme"
             className={({ isActive }) => isActive ? activeStyle : normalStyle}
