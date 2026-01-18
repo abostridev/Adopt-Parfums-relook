@@ -2,18 +2,18 @@ import { motion } from "framer-motion";
 
 const PerfumeMistLoader = ({ text = "Diffusion de la fragrance…" }) => {
   return (
-    // w-full et items-center garantissent le centrage horizontal
-    <div className="w-full h-fit  flex flex-col items-center justify-center bg-transparent">
+    // "w-screen" force le composant à occuper toute la largeur du navigateur
+    // "items-center" et "justify-center" centrent le contenu horizontalement et verticalement
+    <div className="w-screen h-fit py-16 flex flex-col items-center justify-center bg-transparent">
       
-      {/* Conteneur relatif pour grouper Flacon + Brume */}
+      {/* Conteneur du flacon + brume */}
       <div className="relative flex flex-col items-center">
         
-        {/* Brume (Placée en absolute par rapport au flacon) */}
-        <div className="absolute -top-16 flex gap-3 pointer-events-none">
+        {/* La brume : centrée horizontalement avec left-1/2 et -translate-x-1/2 */}
+        <div className="absolute -top-16 left-1/2 -translate-x-1/2 flex gap-3 pointer-events-none">
           {[...Array(3)].map((_, i) => (
             <motion.span
               key={i}
-              // Couleur plus colorée (slate-400) mais reste dans le thème
               className="w-2 h-12 bg-slate-400/50 rounded-full blur-[2px]"
               initial={{ opacity: 0, y: 10 }}
               animate={{
@@ -31,17 +31,16 @@ const PerfumeMistLoader = ({ text = "Diffusion de la fragrance…" }) => {
           ))}
         </div>
 
-        {/* Flacon stylisé */}
-        <div className="w-14 h-20 border-2 border-black/60 rounded-b-2xl rounded-t-md relative bg-white/10 backdrop-blur-sm">
-          {/* Bouchon */}
+        {/* Flacon stylisé - Ajout de border-2 pour mieux le voir */}
+        <div className="w-14 h-20 border-2 border-black/60 rounded-b-2xl rounded-t-md relative bg-white/10">
+          {/* Bouchon du flacon */}
           <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-7 h-4 border-2 border-black/60 rounded-sm bg-white" />
         </div>
-
       </div>
 
-      {/* Texte centré avec marge équilibrée */}
+      {/* Texte centré horizontalement */}
       <motion.p
-        className="mt-12 font-serif text-lg tracking-wide text-black/80 text-center px-4"
+        className="mt-12 font-serif text-lg tracking-wide text-black/80 text-center w-full px-4"
         animate={{ opacity: [0.4, 1, 0.4] }}
         transition={{ duration: 2.5, repeat: Infinity }}
       >
