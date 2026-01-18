@@ -140,66 +140,66 @@ const AdminConseils = () => {
 
       {/* HISTORIQUE */}
       <div className="space-y-4">
-        {conseils.map((c) => (
-          <div
-            key={c._id}
-            className="bg-white p-5 rounded-2xl shadow-sm flex items-center gap-6"
-          >
-            {/* MINIATURE */}
-            <video
-              src={getMediaUrl(c.video)}
-              className="w-32 h-20 rounded-xl object-cover"
-              muted
-            />
-
-            {/* INFOS */}
-            <div className="flex-1">
-              <p className="font-medium">{c.title}</p>
-              <p className="text-sm text-[#8A8A8A]">
-                {new Date(c.createdAt).toLocaleDateString()}
-              </p>
-            </div>
-
-            {/* STATUS */}
-            <span
-              className={`text-xs px-4 py-1 rounded-full font-semibold ${c.isActive
-                  ? "bg-green-100 text-green-700"
-                  : "bg-gray-200 text-gray-600"
-                }`}
-            >
-              {c.isActive ? "Publié" : "Désactivé"}
-            </span>
-
-            {/* ACTIONS */}
-            <div className="flex gap-3">
-              <Link
-                to={`/admin/conseils/${c._id}/edit`}
-                className="px-4 py-2 rounded-full border border-blue-300 text-sm hover:bg-[#FAF7F5]"
-              >
-                Modifier
-              </Link>
-
-              <button
-                onClick={() =>
-                  api.patch(`/admin/conseils/${c._id}/toggle`).then(fetchConseils)
-                }
-                className="text-sm px-4 py-2 rounded-full border hover:bg-[#FAF7F5]"
-              >
-                {c.isActive ? "Désactiver" : "Activer"}
-              </button>
-
-              <button
-                onClick={() =>
-                  api.delete(`/admin/conseils/${c._id}`).then(fetchConseils)
-                }
-                className="text-sm px-4 py-2 rounded-full border text-red-500 hover:bg-red-50"
-              >
-                Supprimer
-              </button>
-            </div>
-          </div>
-        ))}
+  {conseils.map((c) => (
+    <div
+      key={c._id}
+      className="bg-white p-4 md:p-5 rounded-2xl shadow-sm flex flex-col md:flex-row md:items-center gap-4 md:gap-6"
+    >
+      {/* HEADER MOBILE (Vidéo + Titre côte à côte sur mobile) */}
+      <div className="flex items-center gap-4 flex-1">
+        <video
+          src={getMediaUrl(c.video)}
+          className="w-24 h-16 md:w-32 md:h-20 rounded-xl object-cover flex-shrink-0"
+          muted
+        />
+        <div className="min-w-0"> {/* min-w-0 évite que le texte casse le layout */}
+          <p className="font-medium truncate">{c.title}</p>
+          <p className="text-sm text-[#8A8A8A]">
+            {new Date(c.createdAt).toLocaleDateString()}
+          </p>
+        </div>
       </div>
+
+      {/* STATUS (Positionné en haut à droite sur mobile via flex-row-reverse ou simple bloc) */}
+      <div className="flex items-center justify-between md:justify-end gap-3">
+        <span
+          className={`text-xs px-4 py-1 rounded-full font-semibold ${
+            c.isActive
+              ? "bg-green-100 text-green-700"
+              : "bg-gray-200 text-gray-600"
+          }`}
+        >
+          {c.isActive ? "Publié" : "Désactivé"}
+        </span>
+      </div>
+
+      {/* ACTIONS (Grille sur mobile, ligne sur tablette/desktop) */}
+      <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 pt-3 border-t md:border-none md:pt-0">
+        <Link
+          to={`/admin/conseils/${c._id}/edit`}
+          className="px-4 py-2 rounded-full border border-blue-300 text-sm hover:bg-[#FAF7F5] text-center"
+        >
+          Modifier
+        </Link>
+
+        <button
+          onClick={() => api.patch(`/admin/conseils/${c._id}/toggle`).then(fetchConseils)}
+          className="text-sm px-4 py-2 rounded-full border hover:bg-[#FAF7F5]"
+        >
+          {c.isActive ? "Désactiver" : "Activer"}
+        </button>
+
+        <button
+          onClick={() => api.delete(`/admin/conseils/${c._id}`).then(fetchConseils)}
+          className="text-sm px-4 py-2 rounded-full border text-red-500 hover:bg-red-50 col-span-2 sm:col-auto"
+        >
+          Supprimer
+        </button>
+      </div>
+    </div>
+  ))}
+</div>
+
 
     </>
   );
