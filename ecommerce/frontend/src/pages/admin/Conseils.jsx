@@ -220,7 +220,7 @@ const AdminConseils = () => {
 
   return (
     <>
-      {/* HEADER */}/*
+      {/* HEADER *
       <div className="mb-12">
         <h1 className="text-4xl font-serif mb-2">
           Conseils & Astuces
