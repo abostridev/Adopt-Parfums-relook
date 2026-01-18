@@ -6,7 +6,6 @@ import ProductCard from "../components/ProductCard";
 import PremiumLoader from "../components/PremiumLoader";
 import { motion } from "framer-motion";
 import { useCart } from "../context/CartContext";
-import PerfumeMistLoader from "../components/PerfumeMistLoader";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -54,7 +53,7 @@ const ProductDetail = () => {
   }, [id]);
 
   if (loading) {
-  return <PerfumeMistLoader text="La fragrance se révèle…" />;
+  return <PremiumLoader text="La fragrance se révèle…" />;
 }
 
 

@@ -7,7 +7,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // 🔄 INIT AUTH (CRUCIAL EN PROD)
+  // INIT AUTH 
   useEffect(() => {
     let isMounted = true;
 
@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
         const res = await api.post("/auth/refresh");
         setAccessToken(res.data.accessToken);
 
-        // ⚠️ NE PAS FORCER LE HEADER
+        // NE PAS FORCER LE HEADER
         const me = await api.get("/users/me");
         if (isMounted) setUser(me.data);
       } catch {
@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
       } finally {
         setTimeout(() => {
           if (isMounted) setLoading(false);
-        }, 1000);
+        }, 600);
       }
     };
 
@@ -33,14 +33,14 @@ export const AuthProvider = ({ children }) => {
     return () => { isMounted = false };
   }, []);
 
-  // 🔐 LOGIN
+  // LOGIN
   const login = async (accessToken) => {
     setAccessToken(accessToken);
     const me = await api.get("/users/me");
     setUser(me.data);
   };
 
-  // 🚪 LOGOUT
+  // LOGOUT
   const logout = async () => {
     try {
       await api.post("/auth/logout");

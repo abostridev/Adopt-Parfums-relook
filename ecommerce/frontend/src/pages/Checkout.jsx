@@ -57,6 +57,8 @@ const Checkout = () => {
     }
   };
 
+
+  
   return (
     <section className="bg-[#FAF7F5] min-h-screen py-16 px-4">
       <div className="max-w-4xl mx-auto bg-white rounded-3xl p-10 shadow-sm">

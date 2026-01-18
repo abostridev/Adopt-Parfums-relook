@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 const PerfumeMistLoader = ({ text = "Diffusion de la fragrance…" }) => {
   return (
-    <div className="min-h-[60vh] flex flex-col items-center justify-center bg-background overflow-hidden">
+    <div className=" flex flex-col items-center justify-center bg-background overflow-hidden">
 
       {/* Flacon stylisé */}
       <div className="w-14 h-20 border border-black/40 rounded-b-2xl rounded-t-md relative mb-10">

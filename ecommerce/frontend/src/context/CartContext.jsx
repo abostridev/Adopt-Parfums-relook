@@ -6,11 +6,14 @@ const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const { user } = useAuth();
+
+  const [cart, setCart] = useState([]);
   const [cartCount, setCartCount] = useState(0);
   const [loadingCart, setLoadingCart] = useState(false);
 
   const fetchCart = async () => {
     if (!user) {
+      setCart([]);
       setCartCount(0);
       return;
     }
@@ -18,8 +21,10 @@ export const CartProvider = ({ children }) => {
     try {
       setLoadingCart(true);
       const res = await api.get("/cart");
+      setCart(res.data);
       setCartCount(res.data.length);
     } catch {
+      setCart([]);
       setCartCount(0);
     } finally {
       setLoadingCart(false);
@@ -32,11 +37,12 @@ export const CartProvider = ({ children }) => {
 
   return (
     <CartContext.Provider
-      value={{ cartCount, fetchCart, loadingCart }}
+      value={{ cart, cartCount, fetchCart, loadingCart }}
     >
       {children}
     </CartContext.Provider>
   );
 };
+
 
 export const useCart = () => useContext(CartContext);
