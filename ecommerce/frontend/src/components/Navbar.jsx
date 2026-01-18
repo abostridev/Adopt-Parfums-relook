@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link,NavLink useNavigate } from "react-router-dom";
 import { ShoppingCart, Search, Menu, User, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import api from "../api/axios";
