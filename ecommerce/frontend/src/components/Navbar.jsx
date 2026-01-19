@@ -108,7 +108,7 @@ const Navbar = () => {
           <NavLink
             to="/conseils"
             className={({ isActive }) =>
-              `px-4 py-2 rounded-full text-sm transition-all ${isActive ? "bg-secondary text-black" : "bg-secondary/70 text-white"
+              `px-4 py-2 rounded-full text-sm transition-all ${isActive ? "bg-secondary text-black" : "bg-secondary text-white"
               }`
             }
           >
@@ -205,21 +205,21 @@ const Navbar = () => {
         <nav className="lg:hidden bg-[background] border-t px-6 py-4 space-y-4">
           <NavLink
             to="/category/femme"
-            className={({ isActive }) => `block py-2 ${isActive ? "text-secondary font-bold" : ""}`}
+            className={({ isActive }) => `block py-2 ${isActive ? "text-secondary font-title text-lg font-bold" : ""}`}
             onClick={() => closeMenu()}
           >
             Femme
           </NavLink>
           <NavLink
             to="/category/homme"
-            className={({ isActive }) => `block py-2 ${isActive ? "text-secondary font-bold" : ""}`}
+            className={({ isActive }) => `block py-2 ${isActive ? "text-secondary font-title text-lg font-bold" : ""}`}
             onClick={() => closeMenu()}
           >
             Homme
           </NavLink>
           <NavLink
             to="/category/enfant"
-            className={({ isActive }) => `block py-2 ${isActive ? "text-secondary font-bold" : ""}`}
+            className={({ isActive }) => `block py-2 ${isActive ? "text-secondary font-bold font-title text-lg" : ""}`}
             onClick={() => closeMenu()}
           >
             Enfant
