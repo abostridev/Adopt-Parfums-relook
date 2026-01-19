@@ -27,26 +27,7 @@ const Navbar = () => {
 
 
 
-  /* =====================
-      commandes
-   ====================== */
-  useEffect(() => {
-    if (!user) {
-      setOrderCount(0);
-      return;
-    }
 
-    const fetchOrders = async () => {
-      try {
-        const res = await api.get("/orders/my");
-        setOrderCount(res.data.filter(order => order.status !== "delivered").length);
-      } catch {
-        setOrderCount(0);
-      }
-    };
-
-    fetchOrders();
-  }, [user]);
 
   /* =====================
      LOGOUT PROPRE
